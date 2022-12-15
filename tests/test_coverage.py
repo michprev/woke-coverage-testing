@@ -20,7 +20,7 @@ class Sequence:
         default_chain.default_account = random_address()
 
         self._deployer = ConstAddressDeployer.deploy()
-    
+
     @flow
     def flow_deploy_fee_collector(self):
         salt = random_bytes(32, 32)
@@ -35,5 +35,7 @@ class Sequence:
 
 
 def test_coverage(coverage):
+    default_chain.gas_price = 0
+
     campaign = Campaign(Sequence)
     campaign.run(1000, 50, coverage=coverage)
